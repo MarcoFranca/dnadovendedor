@@ -8,7 +8,8 @@ type HeroProps = {
     mapsUrl: string;
     title?: React.ReactNode;
     subtitle?: string;
-    artworkSrc?: string;
+    artworkSrc?: string;   // pessoas recortadas (PNG)
+    background?: string;   // arte dourada de fundo
     logoSrc?: string;
     dateLabel?: string;
     timeLabel?: string;
@@ -28,7 +29,8 @@ export const Hero: React.FC<HeroProps> = ({
                                                   </>
                                               ),
                                               subtitle = "Um evento prático e direto para quem quer dominar vendas de alto valor, aumentar autoridade e criar consistência nos resultados.",
-                                              artworkSrc = "/IDV-1.png",
+                                              artworkSrc = "/pessoas.png",
+                                              background = "/arte1.png",
                                               logoSrc = "/dna-logo.png",
                                               dateLabel = "17/09",
                                               timeLabel = "20:00",
@@ -38,57 +40,70 @@ export const Hero: React.FC<HeroProps> = ({
 
     return (
         <section className="relative isolate overflow-hidden w-full min-h-[78vh] md:min-h-[92vh]">
-            {/* Arte mobile = cobre tudo */}
+            {/* Camada 1 — background (mais ao fundo) */}
             <div
-                className="absolute inset-0 -z-10 bg-cover bg-center md:hidden"
-                style={{ backgroundImage: `url('${artworkSrc}')` }}
-            />
-            {/* Arte desktop à direita */}
-            <div
-                className="hidden md:block absolute inset-y-0 right-0 -z-10 h-full bg-cover bg-right"
-                style={{ backgroundImage: `url('${artworkSrc}')`, width: "min(980px,60vw)" }}
+                className="absolute inset-0 -z-40 bg-cover bg-center"
+                style={{ backgroundImage: `url('${background}')` }}
             />
 
-            {/* Gradiente */}
-            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/80 via-black/60 to-black/15 md:bg-gradient-to-r md:from-black/90 md:via-black/65 md:to-transparent" />
+            {/* Camada 2 — gradiente (abaixo das pessoas) */}
+            <div className="absolute inset-0 -z-30 pointer-events-none bg-gradient-to-b from-black/80 via-black/50 to-black/10 md:bg-gradient-to-r md:from-black/85 md:via-black/45 md:to-transparent" />
 
-            {/* Rings desktop */}
-            <div className="hidden md:flex pointer-events-none absolute inset-0 -z-10 items-center justify-end opacity-55">
+            {/* Camada 3 — rings (também abaixo das pessoas) */}
+            <div className="hidden md:flex pointer-events-none absolute inset-0 -z-20 items-center justify-end opacity-50">
                 <svg viewBox="0 0 100 100" className="w-[120%] max-w-[1200px] h-auto translate-x-12">
                     <defs>
-                        <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient id="gold-hero" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stopColor="#fbbf24" stopOpacity=".18" />
                             <stop offset="100%" stopColor="#f59e0b" stopOpacity=".06" />
                         </linearGradient>
                     </defs>
                     {[30, 47, 64, 81, 98].map((r, i) => (
-                        <circle key={i} cx="72" cy="45" r={r} stroke="url(#gold)" strokeWidth=".7" fill="none" />
+                        <circle key={i} cx="72" cy="45" r={r} stroke="url(#gold-hero)" strokeWidth=".7" fill="none" />
                     ))}
                 </svg>
             </div>
 
-            {/* Conteúdo */}
-            <div className="max-w-6xl  px-6">
+            {/* Camada 4 — pessoas */}
+            <div
+                className="
+    absolute right-1/2 translate-x-1/2 md:right-0 md:translate-x-0
+    top-0 md:top-1/2 md:-translate-y-1/2
+    -z-10 pointer-events-none
+  "
+            >
+                <img
+                    src={artworkSrc}
+                    alt="Paulo Henriques e Pablo Marçal"
+                    className="
+      w-[130vw] max-w-none
+      md:w-[min(100vw,1400px)] md:translate-x-[12vw]
+      drop-shadow-[0_20px_60px_rgba(0,0,0,1.5)]
+    "
+                />
+            </div>
+
+
+            {/* Conteúdo (sempre por cima) */}
+            <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6">
                 <div
                     className="
-            grid grid-cols-1 md:grid-cols-[1fr,minmax(260px,520px)] gap-8 items-center
-            pt-110 md:pt-14 pb-5
-            text-center md:text-left
+            grid items-center gap-8
+            grid-cols-1 md:grid-cols-[minmax(520px,760px),1fr]
+            pt-[26vh] pb-8
+            md:pt-16 md:pb-12
           "
                 >
-                    {/* no mobile centraliza */}
-                    <div className="md:pr-6 max-w-2xl mx-auto">
-                        <img
-                            src={logoSrc}
-                            alt="DNA do Vendedor"
-                            className="w-62 sm:w-48 h-auto mb-6 mx-auto md:mx-0"
-                        />
+                    <div className="max-w-[720px] md:pr-6 text-center md:text-left">
+                        <img src={logoSrc} alt="DNA do Vendedor" className="w-44 sm:w-56 h-auto mb-6 mx-auto md:mx-0" />
 
-                        <h1 className="text-2xl sm:text-6xl font-extrabold leading-[1.06] [text-wrap:balance]">
+                        <h1 className="text-3xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.06] [text-wrap:balance]">
                             {title}
                         </h1>
 
-                        <p className="mt-4 text-zinc-300/90 text-base sm:text-lg">{subtitle}</p>
+                        <p className="mt-4 text-zinc-300/90 text-base sm:text-lg max-w-[60ch] mx-auto md:mx-0">
+                            {subtitle}
+                        </p>
 
                         <div className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2">
               <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.14em] border border-amber-400/30 text-amber-300/90 bg-amber-400/10">

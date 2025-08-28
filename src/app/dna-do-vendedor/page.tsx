@@ -31,7 +31,8 @@ export default function DNADoVendedorLanding() {
                 dateLabel="17/09"
                 timeLabel="20:00"
                 placeLabel="Plataforma Internacional — Alphaville"
-                artworkSrc="/IDV-1.png"
+                artworkSrc="/pessoas.png"
+                background="/arte1.png"
                 logoSrc="/dna-logo.png"
             />
 
