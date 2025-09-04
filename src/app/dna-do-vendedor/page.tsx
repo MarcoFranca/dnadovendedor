@@ -33,7 +33,7 @@ export default function DNADoVendedorLanding() {
                 placeLabel="Plataforma Internacional — Alphaville"
                 artworkSrc="/pessoas.png"
                 background="/arte1.png"
-                logoSrc="/dna-logo.png"
+                logoSrc="/LOGO_7.png"
             />
 
             {/* ========================= CONTEÚDO ========================= */}
