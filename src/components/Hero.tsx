@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                         {/* Pessoas — mobile (no topo) */}
                         <div
-                            className="md:hidden w-[130vw] max-w-none -mx-[20vw] -mt-6 mb-2"  /* ↓ subi a imagem e reduzi o espaçamento */
+                            className="md:hidden w-[130vw] max-w-none -mx-[20vw] -mt-3 mb-2"  /* ↓ subi a imagem e reduzi o espaçamento */
                             style={{
                                 WebkitMaskImage:
                                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%)",
