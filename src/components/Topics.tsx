@@ -1,91 +1,87 @@
 "use client";
-import * as React from "react";
-import {
-    Activity, Trophy, Users2, Brain, Target, Cpu, Sparkles, Crown
-} from "lucide-react";
+import React from "react";
+import { Brain, LineChart, Users2, Rocket, Megaphone, Cpu } from "lucide-react";
+import { FancyCard } from "@/components/PremiumFX/FancyCard";
+import SoftGlow from "@/components/PremiumFX/SoftGlow";
 
-type TopicItem =
-    | string
-    | { label: string; icon?: React.ReactNode; hint?: string };
-
+type Topic = { label: string; icon?: React.ReactNode };
 type TopicsProps = {
     title?: string;
-    topics: TopicItem[];
-    subtitle?: string;
-    /** "horizontal" (default) = ícone à esquerda; "vertical" = ícone em cima */
-    variant?: "horizontal" | "vertical";
-    className?: string;
+    topics: (string | Topic)[];
+    glowOpacity?: number;
+    glowSize?: number;
 };
 
-const iconCls = "w-6 h-6 text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.25)]";
-
-
-function autoIcon(label: string) {
-    const t = label.toLowerCase();
-    if (/(freq|consist)/.test(t)) return <Activity className={iconCls} />;
-    if (/(ticket|alto|premium|high)/.test(t)) return <Trophy className={iconCls} />; // ou Crown
-    if (/(network|contatos|relacion)/.test(t)) return <Users2 className={iconCls} />;
-    if (/(mente|mental|mind)/.test(t)) return <Brain className={iconCls} />;
-    if (/(posicion|autorid|marca)/.test(t)) return <Target className={iconCls} />;
-    if (/(ia|ai|intelig)/.test(t)) return <Cpu className={iconCls} />;
-    return <Sparkles className={iconCls} />;
-}
-
-
-function normalize(topics: TopicItem[]) {
-    return topics.map((t) =>
-        typeof t === "string" ? { label: t, icon: autoIcon(t) } : { ...t, icon: t.icon ?? autoIcon(t.label) }
-    );
-}
+const iconByLabel = (label: string) => {
+    const k = label.toLowerCase();
+    if (k.includes("frequ")) return <Brain className="w-6 h-6" />;
+    if (k.includes("high") || k.includes("ticket")) return <LineChart className="w-6 h-6" />;
+    if (k.includes("network")) return <Users2 className="w-6 h-6" />;
+    if (k.includes("mental")) return <Rocket className="w-6 h-6" />;
+    if (k.includes("posicion") || k.includes("branding")) return <Megaphone className="w-6 h-6" />;
+    if (k.includes("intelig") || k.includes("ia")) return <Cpu className="w-6 h-6" />;
+    return <LineChart className="w-6 h-6" />;
+};
 
 export const Topics: React.FC<TopicsProps> = ({
                                                   title = "Temas que serão abordados",
                                                   topics,
-                                                  subtitle,
-                                                  variant = "vertical", // sugiro vertical como padrão para essa seção
-                                                  className = "",
+                                                  glowOpacity = 0.08,
+                                                  glowSize = 1200,
                                               }) => {
-    const items = normalize(topics);
+    const normalized: Topic[] = topics.map((t) =>
+        typeof t === "string" ? { label: t, icon: iconByLabel(t) } : t
+    );
 
     return (
-        <section className={`mt-10 ${className}`}>
-            <div className="rounded-2xl bg-zinc-900/60 border border-zinc-700/40 p-6">
-                <h2 className="text-xl font-extrabold text-center">{title}</h2>
-                {subtitle && (
-                    <p className="text-sm text-zinc-400 max-w-2xl mx-auto mt-1 text-center">{subtitle}</p>
-                )}
+        <section className="relative mt-10">
+            {/* Glow difuso (só em telas >= sm para evitar overdraw no mobile) */}
+            <SoftGlow opacity={glowOpacity} size={glowSize} className="hidden sm:block" />
 
-                {/* grade elástica + alturas iguais */}
-                <div className="mt-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {items.map(({label, icon, hint}) => {
-                        const baseCard =
-                            "h-full rounded-xl border border-amber-400/20 bg-[#111]/70 px-4 py-4";
-                        if (variant === "vertical") {
-                            return (
-                                <div key={label} className={`${baseCard} flex flex-col items-center text-center`}>
-                                    <div className="inline-flex items-center justify-center rounded-xl bg-amber-400/10 border border-amber-400/20 p-3 mb-3">
-                                        {icon}
-                                    </div>
-                                    <div className="font-semibold">{label}</div>
-                                    {hint && <div className="text-[12px] text-zinc-400 mt-1">{hint}</div>}
-                                </div>
-                            );
-                        }
-                        // horizontal (ícone à esquerda)
-                        return (
-                            <div key={label} className={`${baseCard} flex items-start gap-3`}>
-                                <div className="inline-flex items-center justify-center rounded-xl bg-amber-400/10 border border-amber-400/20 p-3">
+            {/* FancyCard sem rotação (estático por padrão); passe animated se quiser em alguma vitrine */}
+            <FancyCard>
+                <div className="p-6 text-center">
+                    <h2 className="text-xl font-extrabold mb-4 tracking-tight">{title}</h2>
+
+                    {/* 2 col no mobile, 3 col no md; 6 itens -> 3x2 no desktop */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {normalized.map(({ label, icon }) => (
+                            <div
+                                key={label}
+                                className="
+                  group rounded-xl px-4 py-5
+                  bg-black/50 border border-amber-400/15
+                  transition-all duration-300 will-change-transform
+                  hover:border-amber-400/35 hover:shadow-[0_10px_30px_rgba(251,191,36,0.06)]
+                  hover:-translate-y-[2px]
+                  focus-within:border-amber-400/50
+                  h-28 flex flex-col items-center justify-center
+                "
+                                tabIndex={-1}
+                            >
+                                {/* badge do ícone */}
+                                <div
+                                    className="
+                    mb-2 inline-flex items-center justify-center
+                    w-9 h-9 rounded-full
+                    bg-amber-400/10 border border-amber-400/30
+                    text-amber-300
+                    transition-colors
+                    group-hover:bg-amber-400/15 group-hover:border-amber-400/50
+                  "
+                                    aria-hidden
+                                >
                                     {icon}
                                 </div>
-                                <div className="leading-tight">
-                                    <div className="font-semibold">{label}</div>
-                                    {hint && <div className="text-[12px] text-zinc-400 mt-1">{hint}</div>}
+
+                                <div className="font-semibold text-center leading-tight [text-wrap:balance]">
+                                    {label}
                                 </div>
                             </div>
-                        );
-                    })}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </FancyCard>
         </section>
     );
 };

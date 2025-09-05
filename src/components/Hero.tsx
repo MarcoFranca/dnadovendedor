@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useCountdown } from "@/hooks/useCountdown";
+import GoldDust from "@/components/PremiumFX/GoldDust";
 
 type HeroProps = {
     eventISO: string;
@@ -40,12 +41,16 @@ export const Hero: React.FC<HeroProps> = ({
 
     return (
         <section className="relative isolate overflow-hidden w-full min-h-[78vh] md:min-h-[92vh] text-zinc-100">
+            <GoldDust />
+
             {/* BG */}
             <div
                 className="absolute inset-0 -z-40 bg-cover bg-center"
                 style={{ backgroundImage: `url('${background}')` }}
+                aria-hidden
             />
-            {/* Rings sutis */}
+
+            {/* Rings (desktop) */}
             <div className="hidden md:flex pointer-events-none absolute inset-0 -z-30 items-center justify-end opacity-40">
                 <svg viewBox="0 0 100 100" className="w-[120%] max-w-[1200px] h-auto translate-x-12">
                     <defs>
@@ -55,80 +60,99 @@ export const Hero: React.FC<HeroProps> = ({
                         </linearGradient>
                     </defs>
                     {[30,47,64,81,98].map((r,i)=>(
-                        <circle key={i} cx="72" cy="45" r={r} stroke="url(#gold-hero)" strokeWidth=".7" fill="none"/>
+                        <circle key={i} cx="72" cy="45" r={r} stroke="url(#gold-hero)" strokeWidth=".7" fill="none" />
                     ))}
                 </svg>
             </div>
 
-            {/* PESSOAS — DESKTOP (centralizados na div da direita, maiores) */}
-            <div className="hidden md:block absolute right-0 md:top-0 md:translate-y-0 -z-9 pointer-events-none" style={{
-                    WebkitMaskImage:
-                        "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
-                    maskImage:
-                        "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
-                }}>
+            {/* Pessoas — desktop (igual ao seu) */}
+            <div
+                className="hidden md:block absolute right-0 md:top-0 md:translate-y-0 -z-9 pointer-events-none"
+
+                aria-hidden
+            >
+                <div
+                    style={{
+                        WebkitMaskImage:
+                            "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+                        maskImage:
+                            "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+                    }}>
+
                 <img
                     src={artworkSrc}
-                    alt="Paulo Henriques e Pablo Marçal"
-                    className="
-      w-[min(60vw)] max-w-none translate-x-[6vw]
-      drop-shadow-[0_24px_80px_rgba(0,0,0,0.85)]
-    "
+                    alt=""
+                    className="w-[min(60vw)] max-w-none translate-x-[6vw] drop-shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
+                    loading="eager"
+                    decoding="async"
                 />
-                {/* logo sobre as mãos */}
+                </div>
                 <img
                     src={logoSrc}
-                    alt="DNA do Vendedor"
-                    className="absolute left-1/2 -translate-x-[23%] bottom-[8vh] w-120
-               drop-shadow-[0_8px_22px_rgba(0,0,0,0.6)]"
+                    alt=""
+                    className="absolute left-1/2 -translate-x-[23%]  bottom-[7vh] w-120 drop-shadow-[0_8px_22px_rgba(0,0,0,0.6)]"
+                    loading="lazy"
+                    decoding="async"
                 />
             </div>
 
+            {/* Gradiente de contraste */}
+            <div
+                className="
+          absolute inset-0 -z-10 pointer-events-none
+          bg-gradient-to-b from-black/85 via-black/60 to-black/15
+          md:bg-gradient-to-r md:from-black/92 md:via-black/70 md:to-transparent
+        "
+                aria-hidden
+            />
 
-            {/* Gradiente de contraste sobre o BG/pessoas */}
-            <div className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-black/80 via-black/55 to-black/15 md:bg-gradient-to-r md:from-black/92 md:via-black/70 md:to-transparent" />
-
-            {/* CONTEÚDO */}
-            <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6">
+            {/* Conteúdo */}
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
                 <div
                     className="
             grid items-start gap-8
             grid-cols-1 md:grid-cols-[minmax(560px,760px),1fr]
-            pt-[36vh] md:pt-16 pb-10 md:pb-12
+            pt-6 sm:pt-8 md:pt-16 pb-10 md:pb-12
           "
                 >
+                    {/* Coluna esquerda */}
+                    <div className="max-w-[750px] md:pr-6 text-center md:text-left relative">
 
-
-
-                    {/* COLUNA ESQUERDA */}
-                    <div className="max-w-[780px] md:pr-6 text-center md:text-left">
-                        {/* logo no mobile */}
-
-                        {/* PESSOAS — MOBILE (no topo, grandes, com fade) */}
+                        {/* Pessoas — mobile (AGORA no topo, grande, usando o mesmo mask do antigo) */}
                         <div
-                            className="md:hidden absolute left-1/2 top-0 -translate-x-1/2 -z-20 pointer-events-none w-[150vw]"
+                            className="md:hidden w-[150vw] max-w-none -mx-[25vw] -mt-1 mb-4"
                             style={{
                                 WebkitMaskImage:
                                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%)",
                                 maskImage:
                                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%)",
                             }}
+                            aria-hidden
                         >
                             <img
                                 src={artworkSrc}
                                 alt="Paulo Henriques e Pablo Marçal"
-                                className="w-full h-auto max-w-none select-none pointer-events-none"
+                                className="w-full h-auto select-none pointer-events-none drop-shadow-[0_12px_40px_rgba(0,0,0,0.65)]"
                                 draggable={false}
+                                loading="eager"
+                                decoding="async"
                             />
                         </div>
 
-                        <img src={logoSrc} alt="DNA do Vendedor" className="md:hidden w-80 sm:w-56 h-auto mb-6 mx-auto" />
+                        {/* Logo no mobile */}
+                        <img
+                            src={logoSrc}
+                            alt="DNA do Vendedor"
+                            className="md:hidden w-90 sm:w-56 h-auto mb-6 mx-auto"
+                            loading="lazy"
+                            decoding="async"
+                        />
 
-                        <h1 className="text-3xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.06] [text-wrap:balance]">
+                        <h1 className="text-3xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.06] [text-wrap:balance] tracking-tight">
                             {title}
                         </h1>
 
-                        <p className="mt-4 text-zinc-300/90 text-base sm:text-lg max-w-[60ch] mx-auto md:mx-0">
+                        <p className="mt-4 text-zinc-300/90 text-base sm:text-lg leading-relaxed max-w-[60ch] mx-auto md:mx-0">
                             {subtitle}
                         </p>
 
@@ -145,43 +169,50 @@ export const Hero: React.FC<HeroProps> = ({
                             ))}
                         </div>
 
-                        {/* CTAs — preencher linha */}
+                        {/* CTAs */}
                         <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr,260px] gap-3">
                             <a
                                 href={checkoutUrl}
-                                className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-extrabold text-[#111]
-                           bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
-                           transition-transform active:translate-y-0.5 shadow-lg shadow-yellow-500/20 w-full"
+                                className="
+                  group relative overflow-hidden inline-flex items-center justify-center px-6 py-3 rounded-xl font-extrabold text-[#111]
+                  bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
+                  hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
+                  transition-transform active:translate-y-0.5 shadow-lg shadow-yellow-500/20 w-full
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black
+                "
                             >
-                                QUERO GARANTIR MEU LUGAR!
+                                <span className="relative z-10">QUERO GARANTIR MEU LUGAR!</span>
+                                <span
+                                    aria-hidden
+                                    className="
+                    pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 rotate-12 bg-white/30 blur-md
+                    motion-safe:animate-[sweep_8s_linear_infinite]
+                  "
+                                    style={{
+                                        maskImage:
+                                            "linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%)",
+                                        WebkitMaskImage:
+                                            "linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%)",
+                                    }}
+                                />
                             </a>
+
                             <a
                                 href={mapsUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold border border-amber-400/30 hover:border-amber-400/60 text-zinc-100 bg-black/40 backdrop-blur-sm w-full md:w-auto"
+                                className="
+                  inline-flex items-center justify-center px-5 py-3 rounded-xl font-bold
+                  border border-amber-400/30 hover:border-amber-400/60 text-zinc-100 bg-black/40 backdrop-blur-sm
+                  w-full md:w-auto
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black
+                "
                             >
                                 Ver localização
                             </a>
                         </div>
 
-                        {/*/!* Info cards *!/*/}
-                        {/*<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">*/}
-                        {/*    <div className="rounded-2xl bg-black/55 backdrop-blur-sm border border-amber-400/20 p-4">*/}
-                        {/*        <div className="text-[10px] uppercase tracking-[0.16em] text-zinc-400 font-semibold">Data</div>*/}
-                        {/*        <div className="text-lg font-bold">{dateLabel}</div>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="rounded-2xl bg-black/55 backdrop-blur-sm border border-amber-400/20 p-4">*/}
-                        {/*        <div className="text-[10px] uppercase tracking-[0.16em] text-zinc-400 font-semibold">Horário</div>*/}
-                        {/*        <div className="text-lg font-bold">{timeLabel}</div>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="rounded-2xl bg-black/55 backdrop-blur-sm border border-amber-400/20 p-4">*/}
-                        {/*        <div className="text-[10px] uppercase tracking-[0.16em] text-zinc-400 font-semibold">Local</div>*/}
-                        {/*        <div className="text-lg font-bold">{placeLabel}</div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-
-                        {/* Contador — ocupa a linha toda */}
+                        {/* Contador */}
                         <div className="mt-5">
                             <div className="grid grid-cols-4 gap-3">
                                 {[
@@ -202,7 +233,7 @@ export const Hero: React.FC<HeroProps> = ({
                         </div>
                     </div>
 
-                    {/* COLUNA DIREITA fica vazia (só para manter o respiro da grid) */}
+                    {/* Coluna direita vazia */}
                     <div className="hidden md:block" />
                 </div>
             </div>
