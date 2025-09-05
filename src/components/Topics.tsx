@@ -7,6 +7,8 @@ import SoftGlow from "@/components/PremiumFX/SoftGlow";
 type Topic = { label: string; icon?: React.ReactNode };
 type TopicsProps = {
     title?: string;
+    ctaHref?: string;
+    ctaLabel?: string;
     topics: (string | Topic)[];
     glowOpacity?: number;
     glowSize?: number;
@@ -26,6 +28,8 @@ const iconByLabel = (label: string) => {
 export const Topics: React.FC<TopicsProps> = ({
                                                   title = "Temas que serão abordados",
                                                   topics,
+                                                  ctaHref,
+                                                  ctaLabel,
                                                   glowOpacity = 0.08,
                                                   glowSize = 1200,
                                               }) => {
@@ -80,6 +84,20 @@ export const Topics: React.FC<TopicsProps> = ({
                             </div>
                         ))}
                     </div>
+
+                    {ctaHref && ctaLabel && (
+                        <div className="mt-6 text-center">
+                            <a
+                                href={ctaHref}
+                                className="inline-flex items-center justify-center px-5 py-3 rounded-xl font-extrabold text-[#111]
+                         bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
+                         hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
+                         transition-transform active:translate-y-0.5"
+                            >
+                                {ctaLabel}
+                            </a>
+                        </div>
+                    )}
                 </div>
             </FancyCard>
         </section>

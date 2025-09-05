@@ -9,8 +9,8 @@ type HeroProps = {
     mapsUrl: string;
     title?: React.ReactNode;
     subtitle?: string;
-    artworkSrc?: string;   // PNG recortado (pessoas)
-    background?: string;   // arte dourada
+    artworkSrc?: string;
+    background?: string;
     logoSrc?: string;
     dateLabel?: string;
     timeLabel?: string;
@@ -59,33 +59,29 @@ export const Hero: React.FC<HeroProps> = ({
                             <stop offset="100%" stopColor="#f59e0b" stopOpacity=".06" />
                         </linearGradient>
                     </defs>
-                    {[30,47,64,81,98].map((r,i)=>(
+                    {[30, 47, 64, 81, 98].map((r, i) => (
                         <circle key={i} cx="72" cy="45" r={r} stroke="url(#gold-hero)" strokeWidth=".7" fill="none" />
                     ))}
                 </svg>
             </div>
 
-            {/* Pessoas — desktop (igual ao seu) */}
-            <div
-                className="hidden md:block absolute right-0 md:top-0 md:translate-y-0 -z-9 pointer-events-none"
-
-                aria-hidden
-            >
+            {/* Pessoas — desktop */}
+            <div className="hidden md:block absolute right-0 md:top-0 md:translate-y-0 -z-9 pointer-events-none" aria-hidden>
                 <div
                     style={{
                         WebkitMaskImage:
                             "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
                         maskImage:
                             "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
-                    }}>
-
-                <img
-                    src={artworkSrc}
-                    alt=""
-                    className="w-[min(60vw)] max-w-none translate-x-[6vw] drop-shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
-                    loading="eager"
-                    decoding="async"
-                />
+                    }}
+                >
+                    <img
+                        src={artworkSrc}
+                        alt=""
+                        className="w-[min(60vw)] max-w-none translate-x-[6vw] drop-shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
+                        loading="eager"
+                        decoding="async"
+                    />
                 </div>
                 <img
                     src={logoSrc}
@@ -98,11 +94,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Gradiente de contraste */}
             <div
-                className="
-          absolute inset-0 -z-10 pointer-events-none
-          bg-gradient-to-b from-black/85 via-black/60 to-black/15
-          md:bg-gradient-to-r md:from-black/92 md:via-black/70 md:to-transparent
-        "
+                className="absolute inset-0 -z-10 pointer-events-none bg-gradient-to-b from-black/85 via-black/60 to-black/15 md:bg-gradient-to-r md:from-black/92 md:via-black/70 md:to-transparent"
                 aria-hidden
             />
 
@@ -112,15 +104,17 @@ export const Hero: React.FC<HeroProps> = ({
                     className="
             grid items-start gap-8
             grid-cols-1 md:grid-cols-[minmax(560px,760px),1fr]
-            pt-6 sm:pt-8 md:pt-16 pb-10 md:pb-12
+            pt-2 sm:pt-4 md:pt-16  /* ↓ SUBI o conteúdo no mobile */
+            pb-10 md:pb-12
           "
                 >
                     {/* Coluna esquerda */}
-                    <div className="max-w-[750px] md:pr-6 text-center md:text-left relative">
+                    <div className="max-w-[750px] md:pr-6 text-center md:text-left relative mt-[-2vh] sm:mt-[-3vh] md:mt-0">
+                        {/* ↑ um leve pull-up só no mobile */}
 
-                        {/* Pessoas — mobile (AGORA no topo, grande, usando o mesmo mask do antigo) */}
+                        {/* Pessoas — mobile (no topo) */}
                         <div
-                            className="md:hidden w-[150vw] max-w-none -mx-[25vw] -mt-1 mb-4"
+                            className="md:hidden w-[140vw] max-w-none -mx-[20vw] -mt-6 mb-2"  /* ↓ subi a imagem e reduzi o espaçamento */
                             style={{
                                 WebkitMaskImage:
                                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%)",
@@ -139,11 +133,11 @@ export const Hero: React.FC<HeroProps> = ({
                             />
                         </div>
 
-                        {/* Logo no mobile */}
+                        {/* Logo — mobile (MENOR e com menos margem) */}
                         <img
                             src={logoSrc}
                             alt="DNA do Vendedor"
-                            className="md:hidden w-90 sm:w-56 h-auto mb-6 mx-auto"
+                            className="md:hidden w-44 sm:w-52 h-auto mb-3 mx-auto"  /* antes: w-90 sm:w-56 mb-6 */
                             loading="lazy"
                             decoding="async"
                         />
@@ -152,13 +146,13 @@ export const Hero: React.FC<HeroProps> = ({
                             {title}
                         </h1>
 
-                        <p className="mt-4 text-zinc-300/90 text-base sm:text-lg leading-relaxed max-w-[60ch] mx-auto md:mx-0">
+                        <p className="mt-3 sm:mt-4 text-zinc-300/90 text-base sm:text-lg leading-relaxed max-w-[60ch] mx-auto md:mx-0">
                             {subtitle}
                         </p>
 
-                        {/* Badges */}
-                        <div className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2">
-                            {["Imersão Presencial","Alphaville • SP",dateLabel,timeLabel].map((chip)=>(
+                        {/* Badges (um pouco mais perto) */}
+                        <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-2">
+                            {["Imersão Presencial", "Alphaville • SP", dateLabel, timeLabel].map((chip) => (
                                 <span
                                     key={chip}
                                     className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.14em]
@@ -169,8 +163,8 @@ export const Hero: React.FC<HeroProps> = ({
                             ))}
                         </div>
 
-                        {/* CTAs */}
-                        <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr,260px] gap-3">
+                        {/* CTAs (menos espaço antes no mobile para aparecer na 1ª dobra) */}
+                        <div className="mt-4 md:mt-6 grid grid-cols-1 md:grid-cols-[1fr,260px] gap-3">
                             <a
                                 href={checkoutUrl}
                                 className="

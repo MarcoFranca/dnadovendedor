@@ -10,6 +10,8 @@ type VenueImage = {
 
 type VenueSectionProps = {
     title?: string;
+    ctaHref?: string;
+    ctaLabel?: string;
     addressHtml?: React.ReactNode; // pode passar <b>Plataforma…</b> — ...
     images: VenueImage[];
     mapsHref: string;
@@ -17,6 +19,8 @@ type VenueSectionProps = {
 
 export const VenueSection: React.FC<VenueSectionProps> = ({
                                                               title = "Local do evento",
+                                                              ctaHref,
+                                                              ctaLabel,
                                                               addressHtml,
                                                               images,
                                                               mapsHref,
@@ -46,7 +50,8 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                                 priority={i === 0}
                             />
                             {/* overlay sutil */}
-                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent opacity-90" />
+                            <div
+                                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent opacity-90"/>
                             {/* caption opcional */}
                             {img.caption && (
                                 <div className="absolute bottom-0 left-0 right-0 p-2 text-[12px] text-zinc-200/90">
@@ -61,16 +66,36 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                     <p className="text-zinc-300">{addressHtml}</p>
                 )}
 
-                <div className="mt-3">
+                <div className="mt-4 flex flex-col sm:flex-row gap-3">
                     <a
                         href={mapsHref}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center px-5 py-3 rounded-xl font-semibold border border-zinc-600/60 hover:border-amber-400/60 text-zinc-100"
+                        className="w-full sm:w-auto inline-flex items-center justify-center
+               h-11 px-4 text-sm rounded-lg font-semibold
+               bg-white text-black border border-white hover:bg-zinc-100 shadow-sm
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30
+               focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
                     >
                         Abrir no Maps
                     </a>
+
+                    {ctaHref && ctaLabel && (
+                        <a
+                            href={ctaHref}
+                            className="w-full sm:w-auto inline-flex items-center justify-center
+                 h-11 px-5 rounded-xl font-extrabold text-[#111]
+                 bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
+                 hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
+                 transition-transform active:translate-y-0.5
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70
+                 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                        >
+                            {ctaLabel}
+                        </a>
+                    )}
                 </div>
+
             </div>
 
             {/* Lightbox simples */}

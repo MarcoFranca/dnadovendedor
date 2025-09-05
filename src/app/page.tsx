@@ -53,7 +53,10 @@ export default function DNADoVendedorLanding() {
 
                 {/* TEMAS */}
                 <Reveal delay={120}>
-                    <Topics topics={temas} />
+                    <Topics topics={temas}
+                            ctaLabel="QUERO GARANTIR MINHA VAGA"
+                            ctaHref={CHECKOUT_URL}
+                    />
                 </Reveal>
 
                 {/* PALESTRANTE */}
@@ -72,6 +75,19 @@ export default function DNADoVendedorLanding() {
                                 Ajuda vendedores e empreendedores a multiplicarem resultados com
                                 estratégia, frequência e posicionamento.
                             </p>
+                        {(
+                            <div className="mt-6 text-center">
+                                <a
+                                    href={CHECKOUT_URL}
+                                    className="inline-flex items-center justify-center px-5 py-3 rounded-xl font-extrabold text-[#111]
+                         bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
+                         hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
+                         transition-transform active:translate-y-0.5"
+                                >
+                                    {"QUERO GARANTIR MINHA VAGA"}
+                                </a>
+                            </div>
+                        )}
                         </div>
                     </section>
                 </Reveal>
@@ -93,6 +109,8 @@ export default function DNADoVendedorLanding() {
                             </>
                         }
                         mapsHref={MAPS_URL}
+                        ctaLabel="QUERO GARANTIR MINHA VAGA"
+                        ctaHref={CHECKOUT_URL}
                     />
                 </Reveal>
 
