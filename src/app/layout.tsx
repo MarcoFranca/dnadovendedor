@@ -9,6 +9,10 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
     title: "DNA do Vendedor — Imersão",
     description: "Frequência, High Ticket, Branding, IA e mais...",
+    icons: {
+        icon: [{ url: "/icon.png", type: "image/png" }], // type = image/png
+        apple: "/apple-touch-icon.png",
+    },
     openGraph: {
         title: "DNA do Vendedor",
         description: "Imersão em Alphaville — 06/09, 9h",

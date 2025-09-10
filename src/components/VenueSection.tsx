@@ -60,11 +60,7 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                     ))}
                 </div>
 
-
-                <div className="mt-4 flex flex-col sm:flex-row gap-3">
-                {addressHtml && (
-                    <p className="text-zinc-300">{addressHtml}</p>
-                )}
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
                     <a
                         href={mapsHref}
                         target="_blank"
@@ -78,38 +74,46 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                         Abrir no Maps
                     </a>
 
-                 {/*   {ctaHref && ctaLabel && (*/}
-                 {/*       <a*/}
-                 {/*           href={ctaHref}*/}
-                 {/*           className="w-full sm:w-auto inline-flex items-center justify-center*/}
-                 {/*h-11 px-5 rounded-xl font-extrabold text-[#111]*/}
-                 {/*bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400*/}
-                 {/*hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300*/}
-                 {/*transition-transform active:translate-y-0.5*/}
-                 {/*focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70*/}
-                 {/*focus-visible:ring-offset-2 focus-visible:ring-offset-black"*/}
-                 {/*       >*/}
-                 {/*           {ctaLabel}*/}
-                 {/*       </a>*/}
-                 {/*   )}*/}
-                </div>
+                    {addressHtml && (
+                        <div className="text-zinc-300 sm:h-11 sm:inline-flex sm:items-center">
+                            {addressHtml}
+                        </div>
+                    )}
 
+                {/*   {ctaHref && ctaLabel && (*/}
+                {/*       <a*/}
+                {/*           href={ctaHref}*/}
+                {/*           className="w-full sm:w-auto inline-flex items-center justify-center*/}
+                {/*h-11 px-5 rounded-xl font-extrabold text-[#111]*/}
+                {/*bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400*/}
+                {/*hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300*/}
+                {/*transition-transform active:translate-y-0.5*/}
+                {/*focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70*/}
+                {/*focus-visible:ring-offset-2 focus-visible:ring-offset-black"*/}
+                {/*       >*/}
+                {/*           {ctaLabel}*/}
+                {/*       </a>*/}
+                {/*   )}*/}
             </div>
 
-            {/* Lightbox simples */}
-            {lightboxIdx !== null && (
+        </div>
+
+    {/* Lightbox simples */
+    }
+    {
+        lightboxIdx !== null && (
+            <div
+                role="dialog"
+                aria-modal="true"
+                className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                onClick={() => setLightboxIdx(null)}
+            >
                 <div
-                    role="dialog"
-                    aria-modal="true"
-                    className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-                    onClick={() => setLightboxIdx(null)}
+                    className="relative w-full max-w-5xl aspect-video bg-black/40 rounded-xl overflow-hidden border border-zinc-700"
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    <div
-                        className="relative w-full max-w-5xl aspect-video bg-black/40 rounded-xl overflow-hidden border border-zinc-700"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <Image
-                            src={images[lightboxIdx].src}
+                    <Image
+                        src={images[lightboxIdx].src}
                             alt={images[lightboxIdx].alt ?? "Foto ampliada do local"}
                             fill
                             className="object-contain"

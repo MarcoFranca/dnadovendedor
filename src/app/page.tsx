@@ -92,15 +92,15 @@ export default function DNADoVendedorLanding() {
                             { src: "/local/3.png", caption: "" },
                             { src: "/local/4.png", caption: "" },
                         ]}
+                        mapsHref={MAPS_URL}
+                        ctaLabel="QUERO GARANTIR MINHA VAGA"
+                        ctaHref={CHECKOUT_URL}
                         addressHtml={
                             <>
                                 <b>Plataforma Internacional</b> — Alameda Tocantins, 956 •
                                 Alphaville, Barueri/SP
                             </>
                         }
-                        mapsHref={MAPS_URL}
-                        ctaLabel="QUERO GARANTIR MINHA VAGA"
-                        ctaHref={CHECKOUT_URL}
                     />
                 </Reveal>
 
