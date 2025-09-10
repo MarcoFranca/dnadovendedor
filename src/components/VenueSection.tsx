@@ -19,8 +19,6 @@ type VenueSectionProps = {
 
 export const VenueSection: React.FC<VenueSectionProps> = ({
                                                               title = "Local do evento",
-                                                              ctaHref,
-                                                              ctaLabel,
                                                               addressHtml,
                                                               images,
                                                               mapsHref,
@@ -62,11 +60,11 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                     ))}
                 </div>
 
+
+                <div className="mt-4 flex flex-col sm:flex-row gap-3">
                 {addressHtml && (
                     <p className="text-zinc-300">{addressHtml}</p>
                 )}
-
-                <div className="mt-4 flex flex-col sm:flex-row gap-3">
                     <a
                         href={mapsHref}
                         target="_blank"
@@ -80,20 +78,20 @@ export const VenueSection: React.FC<VenueSectionProps> = ({
                         Abrir no Maps
                     </a>
 
-                    {ctaHref && ctaLabel && (
-                        <a
-                            href={ctaHref}
-                            className="w-full sm:w-auto inline-flex items-center justify-center
-                 h-11 px-5 rounded-xl font-extrabold text-[#111]
-                 bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
-                 hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
-                 transition-transform active:translate-y-0.5
-                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70
-                 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                        >
-                            {ctaLabel}
-                        </a>
-                    )}
+                 {/*   {ctaHref && ctaLabel && (*/}
+                 {/*       <a*/}
+                 {/*           href={ctaHref}*/}
+                 {/*           className="w-full sm:w-auto inline-flex items-center justify-center*/}
+                 {/*h-11 px-5 rounded-xl font-extrabold text-[#111]*/}
+                 {/*bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400*/}
+                 {/*hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300*/}
+                 {/*transition-transform active:translate-y-0.5*/}
+                 {/*focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70*/}
+                 {/*focus-visible:ring-offset-2 focus-visible:ring-offset-black"*/}
+                 {/*       >*/}
+                 {/*           {ctaLabel}*/}
+                 {/*       </a>*/}
+                 {/*   )}*/}
                 </div>
 
             </div>
