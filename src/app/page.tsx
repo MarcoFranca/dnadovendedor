@@ -29,10 +29,10 @@ export default function DNADoVendedorLanding() {
             <PageBackdrop />
             {/* HERO */}
             <Hero
-                eventISO="2025-09-17T20:00:00-03:00"
+                eventISO="2025-10-18T20:00:00-03:00"
                 checkoutUrl={CHECKOUT_URL}
                 mapsUrl={MAPS_URL}
-                dateLabel="17/09"
+                dateLabel="18/10"
                 timeLabel="20:00"
                 placeLabel="Plataforma Internacional"
                 artworkSrc="/pessoas.png"
@@ -104,42 +104,56 @@ export default function DNADoVendedorLanding() {
                     />
                 </Reveal>
 
-                {/* DÚVIDAS / WHATSAPP */}
+                {/* DÚVIDAS / WHATSAPP — BLOCO 1 */}
                 <Reveal delay={300}>
                     <section className="mt-6">
                         <div className="rounded-2xl bg-zinc-900/60 border border-zinc-700/40 p-6 text-center">
-                            <h2 className="text-xl font-extrabold mb-3">Ainda tem dúvida?</h2>
+                            <h2 className="text-xl font-extrabold mb-2">Ainda tem dúvida?</h2>
+                            <p className="text-zinc-400 max-w-xl mx-auto">
+                                Fale com nossa equipe e tire suas dúvidas agora no WhatsApp.
+                            </p>
 
-                            <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
-                                {/* WhatsApp — branco e mesmo tamanho do CTA */}
+                            <div className="mt-5">
                                 <a
                                     href={WHATSAPP_URL}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="w-full justify-center sm:w-auto inline-flex items-center gap-2 h-11 px-4
-               rounded-xl font-semibold bg-white text-black border border-white
-               hover:bg-zinc-100 shadow-sm
-               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30
-               focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2
+                     h-11 px-4 rounded-xl font-semibold
+                     bg-white text-black border border-white hover:bg-zinc-100 shadow-sm
+                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30
+                     focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900"
                                 >
                                     WhatsApp
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                         className="w-5 h-5">
-                                        <path
-                                            d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.62-6.003C.122 5.281 5.403 0 12.057 0c3.184 0 6.167 1.24 8.41 3.484a11.79 11.79 0 013.489 8.402c-.003 6.654-5.284 11.935-11.94 11.935a11.9 11.9 0 01-6.003-1.618L.057 24zm6.597-3.807c1.741.995 3.027 1.591 5.293 1.591 5.002 0 9.08-4.072 9.083-9.077.002-5.008-4.068-9.083-9.07-9.085-5.006 0-9.083 4.075-9.085 9.08 0 2.225.651 3.891 1.746 5.6l-.999 3.648 3.032-.757z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                         fill="currentColor" className="w-5 h-5">
+                                        <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.62-6.003C.122 5.281 5.403 0 12.057 0c3.184 0 6.167 1.24 8.41 3.484a11.79 11.79 0 013.489 8.402c-.003 6.654-5.284 11.935-11.94 11.935a11.9 11.9 0 01-6.003-1.618L.057 24zm6.597-3.807c1.741.995 3.027 1.591 5.293 1.591 5.002 0 9.08-4.072 9.083-9.077.002-5.008-4.068-9.083-9.07-9.085-5.006 0-9.083 4.075-9.085 9.08 0 2.225.651 3.891 1.746 5.6l-.999 3.648 3.032-.757z"/>
                                     </svg>
                                 </a>
+                            </div>
+                        </div>
+                    </section>
+                </Reveal>
 
-                                {/* CTA */}
+                {/* CTA ISOLADO — BLOCO 2 */}
+                <Reveal delay={360}>
+                    <section className="mt-4">
+                        <div className="rounded-2xl border border-amber-400/25 bg-amber-400/[0.06] p-6 text-center">
+                            <h3 className="text-lg font-extrabold">Pronto para garantir sua vaga?</h3>
+                            <p className="text-zinc-300 mt-1">
+                                Garanta seu lugar na imersão.
+                            </p>
+
+                            <div className="mt-4">
                                 <a
                                     href={CHECKOUT_URL}
-                                    className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-5
-               rounded-xl font-extrabold text-[#111]
-               bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
-               hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
-               transition-transform active:translate-y-0.5
-               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70
-               focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center
+                     h-11 px-5 rounded-xl font-extrabold text-[#111]
+                     bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400
+                     hover:from-amber-200 hover:via-amber-300 hover:to-yellow-300
+                     transition-transform active:translate-y-0.5
+                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/70
+                     focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                                 >
                                     QUERO GARANTIR MINHA VAGA
                                 </a>
@@ -147,6 +161,7 @@ export default function DNADoVendedorLanding() {
                         </div>
                     </section>
                 </Reveal>
+
 
                 {/* FOOTER */}
                 <footer className="text-center text-sm text-zinc-500 py-8">
