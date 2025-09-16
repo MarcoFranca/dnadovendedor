@@ -7,7 +7,7 @@ import { VenueSection } from "@/components/VenueSection";
 import { Reveal } from "@/components/PremiumFX/Reveal";
 import PageBackdrop from "@/components/PremiumFX/PageBackdrop";
 
-const CHECKOUT_URL = "https://seu-checkout.com/dna-do-vendedor";
+const CHECKOUT_URL = "https://checkout4.xgrow.com/pt/ffe018c0-bcce-4c67-aea0-7b517a38ebff/OTYyODg=";
 const MAPS_URL =
     "https://maps.google.com/?q=Alameda%20Tocantins,%20956%20-%20Alphaville%20Industrial,%20Barueri%20-%20SP,%2006455-020";
 const WHATSAPP_URL =
